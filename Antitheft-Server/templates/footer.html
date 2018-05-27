@@ -1,0 +1,38 @@
+<div class="footer-container">
+    <div class="row">
+        <div class="col-md-3 col-sm-3 col-xs-3 title-footer">
+            <h1>Antitheft Pro</h1>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <div class="row">
+                <nav class="navbar">
+                    <ul class="nav navbar-nav footer-nav">
+                        <li><a href="{{ url_for('index') }}">Home</a></li>
+                        <li><a href="{{ url_for('about') }}">About Us</a></li>
+                        <li><a href="{{ url_for('team') }}">Our Team</a></li>
+                        <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <p class="footer-heading">Stay In Touch</p>
+            <div class="row social">
+
+                <a href="{{ app.config['FACEBOOK'] }}" class="fa fa-facebook"></a>
+                <a href="{{ app.config['TWITTER'] }}" class="fa fa-twitter"></a>
+                <a href="{{ app.config['GOOGLE'] }}" class="fa fa-google"></a>
+
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-3 hide-small">
+            <h3 class="footer-heading">CONTACT US</h3>
+            <br>
+            <p> Antitheft Pro</p>
+            <p>U.P. 281001, India</p>
+            <p> 7464847884, 9458412843</p>
+            <p><a href="mailto://{{ app.config['EMAIL'] }}">{{ app.config['EMAIL'] }}</a></p>
+        </div>
+    </div>
+</div>
+<div class="row base-line" style="padding:0;margin: 0 ">
+    <p style="margin-top: 10px;margin-bottom: 10px">&copy;2018 Antitheft Pro. All Rights reserved</p>
+</div>

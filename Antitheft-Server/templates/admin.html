@@ -1,0 +1,134 @@
+<html>
+<head>
+    <script>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    alert('{{ message }}');
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </script>
+    {% include 'commonHeadElements.html' %}
+    <title>{{ title }}</title>
+    <style type="text/css">
+        .container-profile {
+            margin-top: 10%;
+            margin-left: 15%;
+            margin-right: 15%;
+        }
+
+        .img-size {
+            height: 200px;
+            width: 200px;
+            border-radius: 50%;
+        }
+
+        .row {
+            margin-top: 2%;
+        }
+
+        .star {
+            color: red;
+        }
+
+        td {
+            width: 25%;
+            padding: 1%;
+        }
+    </style>
+</head>
+<body>
+{% include 'header.html' %}
+<div class="container-profile">
+    <form method="post" action="{{ url_for('update_user') }}" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <object data="{{ session['photo'] }}" type="image/jpg" class="img-size">
+                    <img src="{{ session['photo'] }}" alt="profile pic" class="img-size">
+                </object>
+            </div>
+            <div class="col-md-8 col-sm-8 col-xs-12">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <span>Id:</span>
+                        <input type="text" name="id" class="form-control" placeholder="Userid"
+                               value="{{ session['id'] }}">
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6 ">
+                        <span> Name <span class="star">*</span>:</span>
+                        <input type="text" name="name" class="form-control" placeholder="Name"
+                               value="{{ session['name'] }}" required><br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6 ">
+                        <span>E-mail <span class="star">*</span>:</span>
+                        <input value="{{ session['email'] }}" type="email" name="email" placeholder="Email-ID "
+                               class="form-control" required>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <span>Mobile Number <span class="star">*</span>:</span>
+                        <input value="{{ session['mobile'] }}" type="tel" name="mobile" class="form-control"
+                               placeholder="Mobile Number" required
+                               maxlength="10">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6 ">
+                        <span>Age <span class="star">*</span>:</span>
+                        <input value="{{ session['age'] }}" type="number" name="age" placeholder="AGE" maxlength="2"
+                               class="form-control" required>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <span>Address <span class="star">*</span>:</span>
+                        <input value="{{ session['address'] }}" type="text" name="address" class="form-control"
+                               placeholder="Address" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6" style="margin-top: 4%">
+                        <span>Gender <span class="star">*</span>:</span>
+                        {% if session['gender'] == 'male' %}
+                            <label class="radio-inline">
+                                <input type="radio" name="gender" value="male" checked>Male
+                            </label>
+                        {% else %}
+                            <label class="radio-inline">
+                                <input type="radio" name="gender" value="male">Male
+                            </label>
+                        {% endif %}
+                        {% if session['gender'] == 'female' %}
+                            <label class="radio-inline">
+                                <input type="radio" name="gender" value="female" checked>Female
+                            </label>
+                        {% else %}
+                            <label class="radio-inline">
+                                <input type="radio" name="gender" value="female">Female
+                            </label>
+                        {% endif %}
+                        {% if session['gender'] != 'female' and session['gender'] != 'male' %}
+                            <label class="radio-inline">
+                                <input type="radio" name="gender" value="Other" checked>Other
+                            </label>
+                        {% else %}
+                            <label class="radio-inline">
+                                <input type="radio" name="gender" value="Other">Other
+                            </label>
+                            </div>
+                        {% endif %}
+                </div>
+                <div class="row">
+                    <input type="file" name="photo">
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary btn-block">Save</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% include 'footer.html' %}
+</body>
+</html>

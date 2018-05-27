@@ -1,0 +1,18 @@
+[
+  {
+    "productid": "jnvjdnjdnjkf",
+    "product_access_users_id": [
+      "0",
+      "ep4sta0b"
+    ],
+    "productip": "172.16.81.51",
+    "motionport": "8081",
+    "serverport": "3000",
+    "username": "pi",
+    "password": "raspberry",
+    "homedir": "/home/pi",
+    "serverdir":"/home/pi/Antitheft-Pro",
+    "rootdir": "/",
+    "secretkey":"VA7e5qS/5SSS5~8DF!kKK{KN5/.@4T"
+  }
+]

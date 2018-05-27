@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    {% include 'commonHeadElements.html' %}
+    <style>
+        #controlbutton {
+            text-align: center;
+            margin-top: 10%;
+            margin-left: 45%;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 10%
+        }
+
+        #startserver {
+            text-align: center;
+            margin-left: 45%;
+            margin-top: 10%;
+        }
+    </style>
+</head>
+<body>
+{% include 'header.html' %}
+<p id="startserver" onclick="startserver()"></p>
+<h3 id="message"></h3>
+<p id="controlbutton" onclick="enableordisable();"></p>
+<div id="footer">
+    {% include 'footer.html' %}
+</div>
+</body>
+
+<script>
+    $('#footer').css('margin-top', $(document).height() * 0.75);
+</script>
+<script>
+    var isenable = true;
+
+    function makebuttonandmessage() {
+        if (isenable) {
+            $('#message').html('Your Security System is Active...').css('color', 'green');
+            $('#controlbutton').html('Disable System').removeClass('btn btn-primary').addClass('btn btn-danger');
+        }
+        else {
+            $('#message').html('Your Security System is Not Active...').css('color', 'red');
+            $('#controlbutton').html('Enable System').removeClass('btn btn-danger').addClass('btn btn-primary');
+        }
+    }
+
+    function startserver() {
+        $.get("/startserver", function (data) {
+            if (data === "success") {
+                location.reload();
+            }
+            else {
+                alert('Sorry! We are unable to start your Security System. Make sure that internet is connected with it or contact to admin.');
+            }
+        });
+    }
+
+    function enableordisable() {
+        if (isenable) {
+            $.get("/disablesystem", function (data) {
+                if (data === "success") {
+                    isenable = false;
+                    makebuttonandmessage();
+                }
+                else {
+                    alert('Failed to perform the operation.Please contact to admin!');
+                }
+            });
+        }
+        else {
+            $.get("/enablesystem", function (data) {
+                if (data === "success") {
+                    isenable = true;
+                    makebuttonandmessage();
+                }
+                else {
+                    alert('Failed to perform the operation.Please contact to admin!');
+                }
+            });
+        }
+    }
+
+    var txtFile = new XMLHttpRequest();
+    txtFile.open("GET", "/isenablesystem", true);
+    txtFile.onreadystatechange = function () {
+        if (txtFile.readyState === 4) {  // Makes sure the document is ready to parse.
+            if (txtFile.status === 200) {  // Makes sure it's found the file.
+                var rasponsetext = txtFile.responseText;
+                if (rasponsetext === "yes") {
+                    makebuttonandmessage();
+                }
+                else if (rasponsetext === "no") {
+                    isenable = false;
+                    makebuttonandmessage();
+                }
+            }
+            else {
+                isenable = false;
+                //document.write("<h1 style='color:red'>Error:" + txtFile.status + "</h1>");
+                alert('Failed to fetch the information.Please contact to admin!');
+                $('#message').html('Your Security System is Not Responding...').css('color', 'red');
+                $('#startserver').html('Try Fix Problem').addClass('btn btn-warning');
+            }
+        }
+    };
+    txtFile.send(null);
+
+
+</script>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'commonHeadElements.html' %}
+    <title>Antitheft Pro - Home</title>
+    <link rel="stylesheet" type="text/css" href="../static/stylesheets/style.css">
+    <script type="text/javascript" src="../static/scripts/script.js"></script>
+    <script>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    alert('{{ message }}');
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </script>
+</head>
+{% include 'header.html' %}
+<body>
+
+<div class="container-home"
+     style="background: linear-gradient(60deg, #dc5237, #0010f3)">
+    <div class="row">
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <h1 style="text-shadow:3px 3px #555">Antitheft Pro-Built for Security</h1>
+            <h3 style="color: #bfbfbf;text-shadow: 2px 2px #555;">We bring you platform where you can secure your belongings.</h3>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="home-card">
+                <div id="login">
+                    <h4>Sign in</h4>
+                    <hr>
+                    <form method="post" action="/login">
+                        <label>Id :</label>
+                        <input type="text" name="id" placeholder="Enter ID" class="form-control" required><br>
+                        <label>Email :</label>
+                        <input type="password" name="email" placeholder="Email" class="form-control" required><br>
+
+                        <label>Password :</label>
+                        <input type="password" name="password" class="form-control" placeholder="Enter Password"
+                               required><br>
+                        <button class="btn btn-block btn-primary" type="submit">Sign-in</button>
+                        <hr>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'footer.html' %}
+<script>
+    $('.container-home').attr("style","background:url('/static/images/lock.jpg') fixed;background-size: cover;");
+</script>
+</body>
+</html>

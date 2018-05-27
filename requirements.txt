@@ -1,0 +1,4 @@
+paramiko==2.4.1
+urllib3==1.21.1
+Flask==0.12
+Flask-Uploads==0.2.1
